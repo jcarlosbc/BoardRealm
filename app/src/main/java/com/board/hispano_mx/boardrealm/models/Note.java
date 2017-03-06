@@ -1,5 +1,7 @@
 package com.board.hispano_mx.boardrealm.models;
 
+import com.board.hispano_mx.boardrealm.app.MyApplication;
+
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -19,12 +21,12 @@ public class Note extends RealmObject {
     @Required
     private Date createdAt;
 
-    public void Note(){
+    public Note(){
 
     }
 
     public Note(String descripcion) {
-        this.id = 0;
+        this.id= MyApplication.NoteID.incrementAndGet();
         this.descripcion = descripcion;
         this.createdAt = new Date();
     }
