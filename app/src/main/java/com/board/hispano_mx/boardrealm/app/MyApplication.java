@@ -23,7 +23,8 @@ public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
-        setUpConfig();
+        //setUpConfig();
+        Realm.init(getApplicationContext());
 
         Realm realm = Realm.getDefaultInstance();
         BoardID = getIdByTable(realm, Board.class);

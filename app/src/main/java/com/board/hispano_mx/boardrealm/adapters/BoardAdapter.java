@@ -1,6 +1,7 @@
 package com.board.hispano_mx.boardrealm.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.board.hispano_mx.boardrealm.R;
 import com.board.hispano_mx.boardrealm.models.Board;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -30,7 +33,7 @@ public class BoardAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return boardList.size();
     }
 
     @Override
@@ -52,7 +55,7 @@ public class BoardAdapter extends BaseAdapter {
 
             viewHolder = new ViewHolder();
 
-            viewHolder.boardName = (TextView) convertView.findViewById(R.id.edit_title);
+            viewHolder.boardName = (TextView) convertView.findViewById(R.id.boardTitle);
             viewHolder.notes = (TextView) convertView.findViewById(R.id.boardNotes);
             viewHolder.date = (TextView) convertView.findViewById(R.id.boardDate);
 
@@ -62,17 +65,16 @@ public class BoardAdapter extends BaseAdapter {
         }
 
         Board board = boardList.get(position);
-
         int notesNumber = board.getNotes().size();
         String textForNotes = (notesNumber == 1 ) ? notesNumber + " Nota" : notesNumber + " Notas";
 
         viewHolder.boardName.setText(board.getTitle());
         viewHolder.notes.setText(textForNotes);
-        viewHolder.date.setText(board.getCreatedAt().toString());
+
+        viewHolder.date.setText(new SimpleDateFormat("dd/mm/yyyy").format(board.getCreatedAt()));
 
 
-
-        return null;
+        return convertView;
     }
 
     public class ViewHolder{
